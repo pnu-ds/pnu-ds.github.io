@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Programming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Header Section -->
+        <header class="bg-white shadow-md rounded-lg p-8 mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+                Data Programming
+            </h1>
+            <p class="text-lg text-gray-600">
+                Course materials and weekly syllabus.
+            </p>
+        </header>
+
+        <!-- Weekly Syllabus Section -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Weekly Syllabus & Materials</h2>
+            <div class="space-y-6">
+                <script>
+                    const syllabusItems = [
+                        { type: 'week', week: 2, title: 'Orientation & Development Environment Setup', description: 'Course introduction, goals, and setting up the local development environment.', materials: [] },
+                        { type: 'week', week: 3, title: 'Python Basics I Lab', description: 'Data Types, Control Flow, Functions.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week3_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week3_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 4, title: 'Python Basics II Lab', description: 'Collections, Comprehensions, Modules & Packages.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week4_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week4_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 5, title: 'Python Basics III Lab', description: 'Object-Oriented Programming with Classes.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week5_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week5_Lab_Problems.pdf'}] },
+                        { 
+                            type: 'week', 
+                            week: 6, 
+                            title: 'File I/O & Command-Line Interfaces', 
+                            description: 'File I/O, CSV/JSON, argparse, Logging, and Configuration Management.',
+                            materials: [
+                                {name: 'Lecture Code', color: 'gray', file: 'Week6_Lecture_Code.pdf'}
+                            ],
+                            quiz: { title: 'Quiz 1 (Weeks 2-5)', description: 'Covers basic Python concepts: data types, control flow, functions, and classes.', file: 'Quiz_1.pdf' }
+                        },
+                        { type: 'week', week: 7, title: 'NumPy Part 1', description: 'Arrays, Broadcasting, Vectorization, Random Number Generation.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week7_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week7_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 8, title: 'NumPy Part 2', description: 'Advanced Indexing, Seeding for Reproducibility, Numerical Stability.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week8_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week8_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 9, title: 'Pandas Part 1', description: 'Loading, Cleaning, Joining, and Aggregating DataFrames.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week9_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week9_Lab_Problems.pdf'}] },
+                        { 
+                            type: 'week', 
+                            week: 10, 
+                            title: 'Pandas Part 2', 
+                            description: 'Working with Categorical Data and Time Series.',
+                            materials: [{name: 'Lecture Code', color: 'gray', file: 'Week10_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week10_Lab_Problems.pdf'}],
+                            quiz: { title: 'Quiz 2 (Weeks 6-9)', description: 'Covers file handling, CLI, NumPy, and basic Pandas operations.', file: 'Quiz_2.pdf'}
+                        },
+                        { type: 'week', week: 11, title: 'PyTorch Basics Part 1', description: 'Tensors & Automatic Differentiation with Autograd.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week11_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week11_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 12, title: 'PyTorch Basics Part 2', description: 'Building Models with `nn.Module`, Loss Functions & Optimizers.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week12_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week12_Lab_Problems.pdf'}] },
+                        { type: 'week', week: 13, title: 'MLP Modeling', description: 'Regularization (L1/L2), Dropout, and Early Stopping.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week13_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week13_Lab_Problems.pdf'}] },
+                        { 
+                            type: 'week', 
+                            week: 14, 
+                            title: 'Implementing the Training Loop', 
+                            description: 'Dataset/Batch creation, Training/Evaluation loops, Seeding for Reproducibility.',
+                            materials: [{name: 'Lecture Code', color: 'gray', file: 'Week14_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week14_Lab_Problems.pdf'}],
+                            quiz: { title: 'Quiz 3 (Weeks 10-13)', description: 'Covers advanced Pandas and PyTorch fundamentals.', file: 'Quiz_3.pdf' }
+                        },
+                        { type: 'week', week: 15, title: 'Advanced Training Loop', description: 'Hyperparameters, Schedulers, Checkpoints, Saving/Loading Models.', materials: [{name: 'Lecture Code', color: 'gray', file: 'Week15_Lecture_Code.pdf'}, {name: 'Lab Problems', color: 'green', file: 'Week15_Lab_Problems.pdf'}] }
+                    ];
+
+                    const colorMap = {
+                        blue: 'bg-blue-100 text-blue-800 hover:bg-blue-200',
+                        green: 'bg-green-100 text-green-800 hover:bg-green-200',
+                        gray: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+                    };
+
+                    function createSyllabusCard(item) {
+                        const materialsHtml = item.materials.map(material => `
+                            <a href="./pdf_file/${material.file}" target="_blank" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition ${colorMap[material.color]}">
+                                ${material.name}
+                                <span class="ml-1.5 text-xs opacity-75">(PDF)</span>
+                            </a>
+                        `).join('');
+
+                        let quizHtml = '';
+                        if (item.quiz) {
+                            quizHtml = `
+                                <div class="mt-4 pt-4 border-t border-gray-200">
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md">
+                                        <div class="flex items-start space-x-3">
+                                            <div>
+                                                <svg class="h-6 w-6 text-yellow-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-bold text-yellow-900">${item.quiz.title}</h4>
+                                                <p class="text-sm mt-1">${item.quiz.description}</p>
+                                                <a href="./pdf_file/${item.quiz.file}" target="_blank" class="inline-flex items-center mt-3 px-3 py-1 rounded-full text-sm font-medium transition bg-yellow-100 text-yellow-800 hover:bg-yellow-200">
+                                                   View Quiz Problems
+                                                   <span class="ml-1.5 text-xs opacity-75">(PDF)</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        return `
+                        <div class="bg-white p-5 rounded-lg shadow-sm">
+                            <div>
+                                <p class="text-sm font-semibold text-indigo-600">WEEK ${item.week}</p>
+                                <h3 class="text-lg font-bold text-gray-800 mt-1">${item.title}</h3>
+                                <p class="text-gray-600 mt-1 text-sm">${item.description}</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-200">
+                                <div class="flex flex-wrap gap-3">
+                                    ${materialsHtml}
+                                </div>
+                            </div>
+                            ${quizHtml}
+                        </div>
+                        `;
+                    }
+
+
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const container = document.getElementById('syllabus-container');
+                        container.innerHTML = syllabusItems.map(createSyllabusCard).join('');
+                    });
+                </script>
+                <div id="syllabus-container" class="space-y-6">
+                    <!-- Weekly cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-4">
+            <p class="text-gray-500 text-sm">&copy; 2024 Data Programming / Your University. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
