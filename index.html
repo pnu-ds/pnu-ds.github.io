@@ -1,279 +1,707 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Making Decisions with AI - 부산대학교 세미나</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans KR', sans-serif;
-        }
-        .gradient-text {
-            @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Making Decisions with AI — 부산대학교 세미나</title>
+  <meta name="description" content="부산대학교 세미나 Making Decisions with AI — 2025년 11월 17–21일. 연사 소개, 일정, 장소, 온라인(Zoom) 링크." />
+  <meta property="og:title" content="Making Decisions with AI — 부산대학교 세미나" />
+  <meta property="og:description" content="연사 소개와 일정, 온라인/오프라인 안내, Zoom 링크." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <style>
+    /* ------------------------------
+        기본 설정 & 다크모드 친화 팔레트
+    ------------------------------ */
+    :root{
+      --bg: #0c0f14;
+      --surface: #121722;
+      --surface-2: #171c28;
+      --text: #e7edf5;
+      --text-dim: #b6c2d1;
+      --muted: #8a93a3;
+      --stroke: rgba(255,255,255,.08);
+      --acc-1: #5ce1e6; /* 청록 */
+      --acc-2: #a78bfa; /* 보라 */
+      --acc-3: #60a5fa; /* 파랑 */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --maxw: 1200px;
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; color:var(--text); background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 50%),
+                                      radial-gradient(1200px 600px at 80% 110%, rgba(167,139,250,.25), transparent 55%),
+                                      var(--bg);
+      font: 16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{ color: inherit; text-decoration: none }
+    img{ max-width:100%; display:block }
+    .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+
+    /* ------------------------------
+        헤더 & 네비게이션
+    ------------------------------ */
+    header{
+      position: sticky; top:0; z-index:100;
+      backdrop-filter: saturate(1.2) blur(10px);
+      background: linear-gradient(to bottom, rgba(12,15,20,.75), rgba(12,15,20,.35));
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      height:68px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .logo-placeholder{
+      width:40px; height:40px; border-radius:10px; border:1px dashed var(--stroke);
+      display:grid; place-items:center; color:var(--muted); font-size:11px; text-transform:uppercase;
+      background: linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    }
+    nav ul{ display:flex; gap:18px; list-style:none; margin:0; padding:0; }
+    nav a{ color:var(--text-dim) }
+    nav a:hover, nav a:focus{ color:var(--text) }
+
+    /* ------------------------------
+        히어로
+    ------------------------------ */
+    .hero{
+      position: relative; padding:72px 0 36px; overflow:hidden;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:32px; align-items:center;
+    }
+    @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr } }
+    .title{
+      font-size: clamp(28px, 4.6vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -.5px;
+      margin: 4px 0 16px;
+      background: linear-gradient(180deg, #fff, #cfe5ff 55%, #a6b4ff);
+      -webkit-background-clip: text; background-clip:text; color:transparent;
+    }
+    .hero-card{
+      border:1px solid var(--stroke); border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border:1px solid var(--stroke); border-radius: 999px;
+      color:var(--text-dim); font-size:13px; background: rgba(255,255,255,.03);
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--stroke); color:var(--text); font-size:13px; background: linear-gradient(180deg, rgba(92,225,230,.12), rgba(167,139,250,.12));
+    }
+    .meta{ display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 0 }
+    .meta .chip{ background: rgba(255,255,255,.04) }
+    .icon{ width:16px; height:16px; opacity:.9 }
+
+    /* ------------------------------
+        컨트롤(필터/검색)
+    ------------------------------ */
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
+      margin: 18px 0 28px;
+    }
+    .seg, .seg-mode{
+      display:flex; gap:8px; flex-wrap:wrap;
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--stroke); border-radius: 12px; padding:6px;
+    }
+    .seg button, .seg-mode button{
+      appearance:none; border:0; background:transparent; color:var(--text-dim);
+      padding:8px 12px; border-radius: 10px; font-weight:600; cursor:pointer;
+    }
+    .seg button[aria-pressed="true"], .seg-mode button[aria-pressed="true"]{
+      color:var(--text); background: linear-gradient(180deg, rgba(96,165,250,.18), rgba(96,165,250,.08));
+      border:1px solid rgba(96,165,250,.35);
+    }
+    .search{
+      position: relative; flex:1 1 260px; min-width:240px;
+    }
+    .search input{
+      width:100%; padding:12px 14px 12px 38px; border-radius:12px; border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03); color:var(--text);
+      outline:none;
+    }
+    .search .icon{ position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.6 }
+
+    /* ------------------------------
+        스피커 그리드
+    ------------------------------ */
+    .grid{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:20px;
+      padding-left: 0; /* ul 기본값 제거 */
+      list-style-type: none; /* ul 기본값 제거 */
+      margin-block-start: 0; /* ul 기본값 제거 */
+      margin-block-end: 0; /* ul 기본값 제거 */
+    }
+    @media (max-width:1100px){ .grid{ grid-template-columns: repeat(2, 1fr) } }
+    @media (max-width:700px){ .grid{ grid-template-columns: 1fr } }
+    .card{
+      position:relative; overflow:hidden;
+      border:1px solid var(--stroke); border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+    }
+    .card .cover{
+      aspect-ratio: 4/3; background: linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      overflow:hidden;
+    }
+    .card img{ width:100%; height:100%; object-fit:cover; }
+    .card .body{ padding:14px 16px 16px }
+    .card h3{ margin:0 0 8px; font-size:20px; letter-spacing:-.2px }
+    .muted{ color:var(--muted); font-size:14px }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 12px }
+    .tag{
+      font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--stroke); color:var(--text-dim);
+      background: rgba(255,255,255,.03)
+    }
+    .online{ border-color: rgba(92,225,230,.35); color:#c2fafb; background: rgba(92,225,230,.08) }
+    .offline{ border-color: rgba(167,139,250,.35); color:#eae2ff; background: rgba(167,139,250,.10) }
+    .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap }
+    .btn{
+      appearance:none; border:1px solid var(--stroke); background: rgba(255,255,255,.03);
+      color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+    }
+    .btn:focus{ outline:2px solid rgba(96,165,250,.6); outline-offset:2px }
+    .btn.primary{ background: linear-gradient(180deg, rgba(96,165,250,.18), rgba(96,165,250,.08)); border-color: rgba(96,165,250,.35) }
+    .btn.ghost{ color:var(--text-dim) }
+
+    /* 아코디언 스타일 추가 */
+    .accordion-panel {
+      /* .body의 좌우 패딩(16px)은 이미 적용된 상태 */
+      padding-bottom: 4px; /* .body의 하단 패딩(16px) 대신 약간의 공간 추가 */
+      margin-top: -6px; /* 버튼과의 간격 조정 */
+    }
+    .accordion-panel p {
+      margin: 10px 0 0;
+      padding: 12px 14px;
+      background: var(--surface-2); 
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      word-break: break-all;
+    }
+    .accordion-panel a {
+      color: var(--acc-3);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .accordion-btn[aria-expanded="true"] {
+      /* 활성화 시 버튼 스타일 변경 */
+      background: linear-gradient(180deg, rgba(96,165,250,.08), rgba(96,165,250,.04)); 
+      border-color: rgba(96,165,250,.25);
+    }
+
+    .soon{
+      position:absolute; top:12px; right:-22px; transform: rotate(8deg);
+      background: linear-gradient(180deg, rgba(92,225,230,.15), rgba(167,139,250,.15));
+      border:1px dashed var(--stroke); color:var(--text-dim);
+      padding:6px 20px; border-radius:999px; font-weight:700; font-size:12px; letter-spacing:.5px;
+    }
+
+    /* ------------------------------
+        주최/후원
+    ------------------------------ */
+    /* .sponsors CSS 제거됨 */
+    .panel{
+      border:1px solid var(--stroke); border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: var(--shadow); padding:18px;
+    }
+    .logo-grid{
+      display:grid; grid-template-columns: 1fr; gap:14px; /* 1열로 변경 */
+    }
+    @media (max-width:700px){ .logo-grid{ grid-template-columns: 1fr } } /* 2열 -> 1열 */
+    .logo-slot{
+      height:64px; border:1px dashed var(--stroke); border-radius:12px; display:grid; place-items:center; color:var(--muted);
+      background: linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      font-size:12px; text-align:center; padding:6px;
+    }
+    .logo-slot.large{ height:96px; font-weight:700 }
+
+    /* ------------------------------
+        푸터
+    ------------------------------ */
+    footer{
+      margin-top: 48px; padding: 28px 0; color: var(--text-dim);
+      border-top:1px solid var(--stroke);
+    }
+
+    /* 애니메이션 절제 */
+    @media (prefers-reduced-motion: no-preference){
+      .card{ transition: transform .2s ease, border-color .2s ease, background .2s ease }
+      .card:hover{ transform: translateY(-2px) }
+      .btn{ transition: transform .12s ease }
+      .btn:active{ transform: scale(.98) }
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-gray-100 antialiased">
+<body>
+  <!-- HEADER ------------------------------------------------------------ -->
+  <header>
+    <div class="wrap nav" role="navigation" aria-label="주요">
+      <div class="brand">
+        <div class="logo-placeholder" aria-hidden="true">PNU</div>
+        <a href="#top" aria-label="홈으로 이동">Making Decisions with AI</a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">소개</a></li>
+          <li><a href="#speakers">연사</a></li>
+          <li><a href="#sponsors">주최</a></li> <!-- "주최·후원" -> "주최" -->
+          <li><a href="#contact">문의</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- PNU Logo Placeholder -->
-            <div class="text-xl font-bold text-white">
-                부산대학교 데이터사이언스전문대학원
-            </div>
-            <!-- Navigation Links -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-300 hover:text-white transition-colors">세미나 소개</a>
-                <a href="#speakers" class="text-gray-300 hover:text-white transition-colors">연사 소개</a>
-                <a href="#schedule" class="text-gray-300 hover:text-white transition-colors">참가 안내</a>
-                <a href="#sponsors" class="text-gray-300 hover:text-white transition-colors">스폰서</a>
-            </div>
-            <!-- Mobile Menu Button (Placeholder) -->
-            <div class="md:hidden">
-                <button class="text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-
-        <!-- Hero Section -->
-        <section id="hero" class="text-center py-24 md:py-32 bg-gradient-to-b from-slate-900 to-slate-800">
-            <div class="container mx-auto px-6">
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight">
-                    <span class="gradient-text">Making Decisions</span>
-                    <span class="text-white"> with AI</span>
-                </h1>
-                <p class="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-                    부산대학교 데이터사이언스전문대학원 AI 세미나 | 2025년 11월 17일 - 21일
-                </p>
-                <div class="mt-10 flex justify-center">
-                    <a href="#speakers" class="bg-slate-700 text-gray-200 font-medium px-8 py-3 rounded-lg hover:bg-slate-600 transition-colors">
-                        연사 라인업 보기
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-20 md:py-28">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">세미나 소개</h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">
-                    인공지능(AI)은 비즈니스, 연구, 그리고 일상에 이르기까지 모든 영역에서 의사결정 방식을 근본적으로 변화시키고 있습니다.
-                    이번 AI 세미나에서는 "Making Decisions with AI"라는 주제로, 분야별 전문가들을 모시고 최신 연구와 실제 적용 사례를 공유합니다.
-                </p>
-            </div>
-        </section>
-
-        <!-- Speakers Section -->
-        <section id="speakers" class="py-20 md:py-28 bg-slate-800">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-                    연사 소개 (Speakers)
-                </h2>
-                
-                <!-- Speaker Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    
-                    <!-- Speaker Card 1: Yongjae -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/yongjae.jpg" alt="이용재 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">이용재 교수</h3>
-                            <p class="text-blue-300 font-medium">UNIST 산업공학과 & 인공지능대학원</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4"> 추후 공개 </p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 추후 공개</p>
-                                <p><strong>장소:</strong> 추후 공개</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 2: Kibaek -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/kibaek.jpg" alt="김기백 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">김기백 박사</h3>
-                            <p class="text-blue-300 font-medium">Argonne National Laboratory</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">추후 공개</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 추후 공개</p>
-                                <p><strong>장소:</strong> 온라인 (Zoom)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 3: Changhee -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/changhee.jpg" alt="이창희 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">이창희 교수</h3>
-                            <p class="text-blue-300 font-medium">고려대학교 인공지능대학원</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">추후 공개</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 추후 공개</p>
-                                <p><strong>장소:</strong> 추후 공개</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 4: Seokju -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/seokju.jpg" alt="한석주 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">한석주 박사</h3>
-                            <p class="text-blue-300 font-medium">Argonne National Laboratory</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">"Diffusion Federated Datasets"</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 11월 20일 (목) 10:00 - 11:00</p>
-                                <p><strong>장소:</strong> 온라인 (Zoom)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 5: Jeongwhan -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/jeongwhan.jpg" alt="최정환 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">최정환 박사</h3>
-                            <p class="text-blue-300 font-medium">KAIST Information & Electronics Research Institute </p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">"추후 공개"</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 추후 공개</p>
-                                <p><strong>장소:</strong> 추후 공개</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 6: joohwan -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/jeongwhan.jpg" alt="고주환 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">고주환 연구원</h3>
-                            <p class="text-blue-300 font-medium">UMass Amherst</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">"Latent Target Score Matching for Diffusion"</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 11월 19일 (수) 10:00 - 11:00</p>
-                                <p><strong>장소:</strong> 온라인 (Zoom)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 7: Jaeho -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/jaeho.jpg" alt="김재호 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">김재호 박사</h3>
-                            <p class="text-blue-300 font-medium">고려대학교 인공지능대학</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">"Motion Time Series"</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 11월 18일 (화) 16:00 - 17:00</p>
-                                <p><strong>장소:</strong> 온라인 (Zoom)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Speaker Card 8: kkh -->
-                    <div class="bg-slate-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/30">
-                        <img class="w-full h-80 object-cover" src="./speaker/gyeongho.jpg" alt="김경호 연사 사진" onerror="this.src='https://placehold.co/500x500/475569/e2e8f0?text=Image+Error'; this.onerror=null;">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-white">김경호 박사</h3>
-                            <p class="text-blue-300 font-medium">고려대학교 산업공학</p>
-                            <p class="text-lg text-gray-100 font-semibold mt-4">"Deep learning-based prognostics of machining tools"</p>
-                            <div class="mt-4 pt-4 border-t border-slate-600 text-sm space-y-2 text-gray-300">
-                                <p><strong>일시:</strong> 11월 17일 (월) 10:00 - 11:00</p>
-                                <p><strong>장소:</strong> 온라인 (Zoom)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Schedule & Location Section -->
-        <section id="schedule" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-                    참가 안내
-                </h2>
-                <div class="max-w-2xl mx-auto">
-                    <!-- Offline Info - This section has been removed -->
-                    
-                    <!-- Online Info -->
-                    <div class="bg-slate-800 p-8 rounded-lg border border-slate-700">
-                        <h3 class="text-2xl font-bold text-white mb-4">
-                            <span class="gradient-text">온라인</span> 참가
-                        </h3>
-                        <p class="text-gray-300 mb-4">
-                            모든 세션은 동일한 Zoom 링크를 통해 실시간 스트리밍됩니다.
-                        </p>
-                        <button class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-all transform hover:scale-105">
-                            공용 Zoom 링크
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sponsors Section -->
-        <section id="sponsors" class="py-20 md:py-28 bg-slate-800">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-                    Sponsors & Partners
-                </h2>
-                <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-8">
-                    <!-- Sponsor Logo Placeholders -->
-                    <div class="text-gray-400 text-xl font-semibold opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-                        Sponsor Logo 1
-                    </div>
-                    <div class="text-gray-400 text-xl font-semibold opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-                        Sponsor Logo 2
-                    </div>
-                    <div class="text-gray-400 text-xl font-semibold opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-                        Partner Logo 1
-                    </div>
-                    <div class="text-gray-400 text-xl font-semibold opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-                        Sponsor Logo 3
-                    </div>
-                    <div class="text-gray-400 text-xl font-semibold opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-                        Partner Logo 2
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-20 py-12 border-t border-slate-700">
-        <div class="container mx-auto px-6 text-center">
-            <!-- PNU Logo Placeholder -->
-            <div class="text-2xl font-bold text-white mb-4">
-                부산대학교
-            </div>
-            <p class="text-gray-400 text-sm">
-                © 2025 Pusan National University. All rights reserved.
-            </p>
-            <p class="text-gray-500 text-xs mt-2">
-                (46241) 부산광역시 금정구 부산대학로63번길 2 부산대학교 제12공학관 303호
-
-            </p>
+  <!-- HERO -------------------------------------------------------------- -->
+  <main id="top" class="wrap">
+    <section class="hero" aria-label="히어로">
+      <div class="hero-grid">
+        <div>
+          <span class="badge" title="대부분 온라인 진행">
+            <!-- video icon -->
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15 10.5V7a2 2 0 0 0-2-2H5.5A2.5 2.5 0 0 0 3 7.5v9A2.5 2.5 0 0 0 5.5 19h7.5a2 2 0 0 0 2-2v-3.5l4 2.5V8l-4 2.5z"></path></svg>
+            대부분 온라인
+          </span>
+          <h1 class="title">Making Decisions with AI</h1>
+          <p class="muted">부산대학교 세미나 · <strong>2025년 11월 17일(월)–21일(금)</strong></p>
+          <div class="meta">
+            <span class="chip" title="기간">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v2h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm14 8H3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V10z"></path></svg>
+              11.17–11.21
+            </span>
+            <span class="chip" title="장소">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"></path></svg>
+              온·오프라인 (Zoom 제공)
+            </span>
+          </div>
         </div>
-    </footer>
+        <div class="hero-card">
+          <strong>안내</strong>
+          <p class="muted" style="margin:6px 0 10px">
+            각 연사마다 발표 일시가 다릅니다. 아래 필터에서 날짜/방식을 선택하거나 검색해 보세요.
+          </p>
+          <div class="meta">
+            <span class="badge">월 11/17</span>
+            <span class="badge">화 11/18</span>
+            <span class="badge">수 11/19</span>
+            <span class="badge">목 11/20</span>
+            <!-- 11/21(금) 배지 제거됨 -->
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ABOUT ----------------------------------------------------------- -->
+    <section id="about" aria-label="세미나 소개" style="margin-top:8px">
+      <div class="panel">
+        <h2 style="margin:4px 0 10px">세미나 소개</h2>
+        <p class="muted" style="margin:0">
+          “Making Decisions with AI”는 의사결정의 전 과정을 AI로 확장·가속하는 최신 방법론과 실제 적용 사례를 공유하는 자리입니다.
+          대부분의 세션은 <strong>온라인(Zoom)</strong>으로 진행되며, 일부 세션은 <strong>오프라인</strong>으로도 병행합니다.
+          일정·장소·줌 링크는 각 연사 카드에서 확인할 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTROLS -------------------------------------------------------- -->
+    <section aria-label="필터 및 검색">
+      <div class="controls">
+        <div class="seg" role="tablist" aria-label="날짜 필터">
+          <button type="button" class="date-btn" data-day="all" aria-pressed="true">전체</button>
+          <button type="button" class="date-btn" data-day="2025-11-17">11/17(월)</button>
+          <button type="button" class="date-btn" data-day="2025-11-18">11/18(화)</button>
+          <button type="button" class="date-btn" data-day="2025-11-19">11/19(수)</button>
+          <button type="button" class="date-btn" data-day="2025-11-20">11/20(목)</button>
+          <!-- 11/21(금) 필터 버튼 제거됨 -->
+        </div>
+        <!-- 방식 필터 (seg-mode) 제거됨 -->
+        <label class="search" aria-label="검색">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 20l-4.35-4.35A7.5 7.5 0 1 0 16 17l4.35 4.35L21 20zM5.5 10.5A5 5 0 1 1 15.5 10.5 5 5 0 0 1 5.5 10.5z"></path></svg>
+          <input id="search" type="search" placeholder="연사, 소속, 주제 검색…" autocomplete="off" />
+        </label>
+      </div>
+    </section>
+
+    <!-- SPEAKERS -------------------------------------------------------- -->
+    <section id="speakers" aria-labelledby="speakers-title">
+      <h2 id="speakers-title" class="sr-only">연사 소개</h2>
+      <ul class="grid" id="speakerGrid">
+        <!-- 1. 이용재 -->
+        <li class="card" data-day="tba" data-name="이용재" data-aff="울산과학기술원 UNIST" data-title="주제 TBD">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Yongjae" alt="Speaker portrait: 이용재" /></div>
+          <div class="body">
+            <h3>이용재 교수</h3>
+            <div class="muted">울산과학기술원(UNIST), 산업공학과 및 인공지능대학원</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">일정 TBD</span>
+            </div>
+            <p class="muted">주제: 추후 공개</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 2. 김기백 -->
+        <li class="card" data-day="2025-11-19" data-name="김기백" data-aff="Argonne National Laboratory" data-title="Privacy-Preserving Federated Learning for Foundation Models + 아르곤연구소 소개">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Kibaek" alt="Speaker portrait: 김기백" /></div>
+          <div class="body">
+            <h3>김기백 박사</h3>
+            <div class="muted">Argonne National Laboratory</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/19(수) 13:00–14:00</span>
+            </div>
+            <p class="muted">주제: Privacy-Preserving Federated Learning for Foundation Models + 아르곤연구소 소개</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. 이창희 -->
+        <li class="card" data-day="2025-11-17" data-name="이창희" data-aff="고려대학교 인공지능 대학원" data-title="Interpreting with Features: A Deep Learning Approach at Global and Instance Levels">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Changhee" alt="Speaker portrait: 이창희" /></div>
+          <div class="body">
+            <h3>이창희 교수</h3>
+            <div class="muted">고려대학교 인공지능 대학원</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/17(월) 11:00–12:00</span>
+            </div>
+            <p class="muted">주제: Interpreting with Features: A Deep Learning Approach at Global and Instance Levels</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 4. 한석주 -->
+        <li class="card" data-day="2025-11-18" data-name="한석주" data-aff="Argonne National Laboratory" data-title="Diffusion Federated Datasets">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Seokju" alt="Speaker portrait: 한석주" /></div>
+          <div class="body">
+            <h3>한석주 박사</h3>
+            <div class="muted">Argonne National Laboratory</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/18(화) 10:00–12:00</span>
+            </div>
+            <p class="muted">주제: Diffusion Federated Datasets</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 5. 최정환 -->
+        <li class="card" data-day="2025-11-19" data-name="최정환" data-aff="카이스트 KAIST" data-title="주제 TBD">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Jeongwhan" alt="Speaker portrait: 최정환" /></div>
+          <div class="body">
+            <h3>최정환 박사</h3>
+            <div class="muted">카이스트(KAIST)</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/19(수) 11:00–12:00</span>
+            </div>
+            <p class="muted">주제: 추후 공개</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 6. 고주환 -->
+        <li class="card" data-day="2025-11-20" data-name="고주환" data-aff="매사추세츠 대학교 애머스트" data-title="Latent Target Score Matching for Diffusion">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Joohwan" alt="Speaker portrait: 고주환" /></div>
+          <div class="body">
+            <h3>고주환 박사과정</h3>
+            <div class="muted">매사추세츠 대학교 애머스트</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/20(목) 10:00–11:00</span>
+            </div>
+            <p class="muted">주제: Latent Target Score Matching for Diffusion</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 7. 김재호 -->
+        <li class="card" data-day="2025-11-17" data-name="김재호" data-aff="고려대학교 인공지능 대학원" data-title="Motion Time Series">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=JaeHo" alt="Speaker portrait: 김재호" /></div>
+          <div class="body">
+            <h3>김재호 박사</h3>
+            <div class="muted">고려대학교 인공지능 대학원</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/17(월) 16:00–18:00</span>
+            </div>
+            <p class="muted">주제: Motion Time Series</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 8. 홍기석 -->
+        <li class="card" data-day="2025-11-20" data-name="홍기석" data-aff="TBD" data-title="Real-time implementation of AI in Additive Manufacturing">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Hong" alt="Speaker portrait: 홍기석" /></div>
+          <div class="body">
+            <h3>홍기석 박사</h3>
+            <div class="muted">TBD</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/20(목) 11:00–12:00</span>
+            </div>
+            <p class="muted">주제: Real-time implementation of AI in Additive Manufacturing</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 9. 김경호 -->
+        <li class="card" data-day="2025-11-17" data-name="김경호" data-aff="고려대학교 산업공학과" data-title="Deep learning-based prognostics of machining tools">
+          <div class="cover"><img loading="lazy" src="https://placehold.co/400x300/171c28/8a93a3?text=Gyeongho" alt="Speaker portrait: 김경호" /></div>
+          <div class="body">
+            <h3>김경호 박사</h3>
+            <div class="muted">고려대학교 산업공학과</div>
+            <div class="tags">
+              <span class="tag online">온라인</span>
+              <span class="tag">11/17(월) 10:00–11:00</span>
+            </div>
+            <p class="muted">주제: Deep learning-based prognostics of machining tools</p>
+            <div class="actions">
+              <button type="button" class="btn primary accordion-btn" aria-expanded="false" data-zoom-link="#">
+                Zoom 링크 (클릭)
+              </button>
+            </div>
+            <div class="accordion-panel" style="display: none;">
+              <p class="muted">
+                링크: <a href="#" rel="noopener noreferrer">추후 공개</a>
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SPONSORS -------------------------------------------------------- -->
+    <section id="sponsors" aria-label="주최" style="margin-top:28px">
+      <!-- .sponsors 래퍼 제거, 패널만 남김 -->
+      <div class="panel">
+        <h3 style="margin:6px 0 12px">주최</h3>
+        <div class="logo-grid">
+          <!-- Slot 1: PNU Logo -->
+          <div class="logo-slot large">
+            <img src="https://placehold.co/200x96/171c28/8a93a3?text=pnu/data.jpg" alt="부산대학교 로고" style="max-height: 90%; max-width: 90%; object-fit: contain; border-radius: 0;" />
+          </div>
+          
+          <!-- Slot 2: Yoontae Hwang (제거됨) -->
+        </div>
+      </div>
+      <!-- 후원/파트너 패널 제거됨 -->
+    </section>
+
+    <!-- CONTACT (제거됨) -------------------------------------------------- -->
+    <!-- "문의" 섹션 다시 추가 -->
+    <section id="contact" aria-label="문의" style="margin-top:28px">
+      <div class="panel">
+        <h3 style="margin:6px 0 12px">문의</h3>
+        <p class="muted" style="margin:0">
+          황윤태, <a href="mailto:yoontae.hwang@pusan.ac.kr" style="color: var(--acc-3); text-decoration: underline;">yoontae.hwang@pusan.ac.kr</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © 2025 Pusan National University · Making Decisions with AI
+    </div>
+  </footer>
+
+  <!-- SCRIPTS ----------------------------------------------------------- -->
+  <script>
+    // 필터 상태
+    const state = { day: "all", q: "" }; // 'mode' 제거
+    const grid = document.getElementById('speakerGrid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+
+    // 날짜 필터
+    document.querySelectorAll('.date-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.date-btn').forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        state.day = btn.dataset.day;
+        applyFilters();
+      });
+    });
+
+    // 방식 필터 스크립트 제거됨
+
+    // 검색
+    document.getElementById('search').addEventListener('input', (e)=>{
+      state.q = e.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    function applyFilters(){
+      cards.forEach(card=>{
+        const day = card.dataset.day;
+        // 'mode' 관련 코드 제거됨
+        const hay = (card.dataset.name + " " + card.dataset.aff + " " + card.dataset.title).toLowerCase();
+
+        const dayOk = (state.day === "all") || (state.day === day);
+        // 'modeOk' 관련 코드 제거됨
+        const qOk = !state.q || hay.includes(state.q);
+
+        card.style.display = (dayOk && qOk) ? "" : "none"; // 'modeOk' 조건 제거
+      });
+    }
+
+    // Zoom 링크 아코디언
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            
+            // 패널 찾기
+            const panel = btn.closest('.body').querySelector('.accordion-panel');
+            if (!panel) return;
+
+            if (isExpanded) {
+                // 패널 닫기
+                panel.style.display = 'none';
+            } else {
+                // 패널 열기
+                const zoomLink = btn.dataset.zoomLink || '#';
+                const linkText = (zoomLink === '#') ? '추후 공개' : zoomLink;
+                const linkElement = panel.querySelector('a');
+                
+                if (linkElement) {
+                    linkElement.href = zoomLink;
+                    linkElement.textContent = linkText;
+                    if (zoomLink === '#') {
+                        linkElement.removeAttribute('target'); // TBD 링크는 새 탭X
+                    } else {
+                        linkElement.setAttribute('target', '_blank'); // 실제 링크는 새 탭
+                    }
+                }
+                panel.style.display = 'block';
+            }
+        });
+    });
+
+
+    // 간단 토스트 (현재 사용되지 않음)
+    function toast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      Object.assign(t.style, {
+        position:'fixed', left:'50%', bottom:'28px', transform:'translateX(-50%)',
+        background: 'linear-gradient(180deg, rgba(96,165,250,.22), rgba(96,165,250,.12))',
+        border:'1px solid rgba(96,165,250,.35)', color:'#fff', padding:'10px 14px',
+        borderRadius:'10px', zIndex:9999, boxShadow:'0 10px 30px rgba(0,0,0,.35)',
+        fontSize: '14px',
+        fontWeight: '600'
+      });
+      document.body.appendChild(t);
+      // 애니메이션을 위한 약간의 딜레이
+      setTimeout(() => {
+        t.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        t.style.opacity = '1';
+        t.style.transform = 'translate(-50%, -10px)';
+      }, 10);
+      
+      // 1.8초 후에 사라짐
+      setTimeout(()=>{ 
+        t.style.opacity = '0';
+        t.style.transform = 'translate(-50%, 0px)';
+        // transition이 끝난 후 DOM에서 제거
+        setTimeout(() => t.remove(), 300);
+      }, 1800);
+    }
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
