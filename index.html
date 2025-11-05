@@ -171,11 +171,33 @@
     }
     .online{ border-color: rgba(92,225,230,.35); color:#c2fafb; background: rgba(92,225,230,.08) }
     .offline{ border-color: rgba(167,139,250,.35); color:#eae2ff; background: rgba(167,139,250,.10) }
-    .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap }
+    .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; align-items:center }
+
+    /* --- Zoom 버튼 크기 통일 패치 --- */
     .btn{
-      appearance:none; border:1px solid var(--stroke); background: rgba(255,255,255,.03);
-      color:var(--text); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600;
+      appearance:none;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+
+      /* a / button 동일한 박스 모델 */
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      /* 고정 규격 */
+      min-height:40px;
+      padding:0 14px;
+      line-height:1;         /* 기본 line-height 차이 제거 */
+      font: inherit;         /* 폰트 상속 */
+      font-weight:600;
+      text-decoration:none;  /* a 기본 밑줄 제거 */
+      border-radius:10px;
+      cursor:pointer;
+      vertical-align:middle;
     }
+    .btn.block{ width:100%; } /* (옵션) 가로 꽉 채우는 변형 */
     .btn:focus{ outline:2px solid rgba(96,165,250,.6); outline-offset:2px }
     .btn.primary{ background: linear-gradient(180deg, rgba(96,165,250,.18), rgba(96,165,250,.08)); border-color: rgba(96,165,250,.35) }
     .btn.ghost{ color:var(--text-dim) }
@@ -378,12 +400,12 @@
             </div>
             <p class="muted">주제: Interpreting with Features: A Deep Learning Approach at Global and Instance Levels</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -405,12 +427,12 @@
             </div>
             <p class="muted">주제: Diffusion Federated Datasets</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -432,12 +454,12 @@
             </div>
             <p class="muted">주제: 추후 공개</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -459,12 +481,12 @@
             </div>
             <p class="muted">주제: Latent Target Score Matching for Diffusion</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -486,12 +508,12 @@
             </div>
             <p class="muted">주제: Motion Time Series</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -513,12 +535,12 @@
             </div>
             <p class="muted">주제: Real-time implementation of AI in Additive Manufacturing</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -540,12 +562,12 @@
             </div>
             <p class="muted">주제: Deep learning-based prognostics of machining tools</p>
             <div class="actions">
-              <a href="https://unist-ac-kr.zoom.us/j/9809133225" 
-                 class="btn primary" 
-                 target="_blank" 
-                 rel="noopener noreferrer">
-                Zoom 링크 (클릭)
-              </a>
+              <a href="https://unist-ac-kr.zoom.us/j/9809133225"
+                 class="btn primary"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Zoom 링크 (클릭)
+              </a>
             </div>
             <div class="accordion-panel" style="display: none;">
               <p class="muted">
@@ -605,8 +627,6 @@
       });
     });
 
-    // 방식 필터 스크립트 제거됨
-
     // 검색
     document.getElementById('search').addEventListener('input', (e)=>{
       state.q = e.target.value.trim().toLowerCase();
@@ -616,14 +636,12 @@
     function applyFilters(){
       cards.forEach(card=>{
         const day = card.dataset.day;
-        // 'mode' 관련 코드 제거됨
         const hay = (card.dataset.name + " " + card.dataset.aff + " " + card.dataset.title).toLowerCase();
 
         const dayOk = (state.day === "all") || (state.day === day);
-        // 'modeOk' 관련 코드 제거됨
         const qOk = !state.q || hay.includes(state.q);
 
-        card.style.display = (dayOk && qOk) ? "" : "none"; // 'modeOk' 조건 제거
+        card.style.display = (dayOk && qOk) ? "" : "none";
       });
     }
 
@@ -660,7 +678,6 @@
         });
     });
 
-
     // 간단 토스트 (현재 사용되지 않음)
     function toast(msg){
       const t = document.createElement('div');
@@ -674,24 +691,17 @@
         fontWeight: '600'
       });
       document.body.appendChild(t);
-      // 애니메이션을 위한 약간의 딜레이
       setTimeout(() => {
         t.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
         t.style.opacity = '1';
         t.style.transform = 'translate(-50%, -10px)';
       }, 10);
-
-      // 1.8초 후에 사라짐
       setTimeout(()=>{ 
         t.style.opacity = '0';
         t.style.transform = 'translate(-50%, 0px)';
-        // transition이 끝난 후 DOM에서 제거
         setTimeout(() => t.remove(), 300);
       }, 1800);
     }
   </script>
 </body>
 </html>
-
-
-
