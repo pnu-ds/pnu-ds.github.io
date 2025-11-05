@@ -235,24 +235,26 @@
     }
 
     /* ------------------------------
-        주최/후원
+        주최/후원/주관
     ------------------------------ */
-    /* .sponsors CSS 제거됨 */
     .panel{
       border:1px solid var(--stroke); border-radius: var(--radius);
       background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
       box-shadow: var(--shadow); padding:18px;
     }
     .logo-grid{
-      display:grid; grid-template-columns: 1fr; gap:14px; /* 1열로 변경 */
+      display:grid; grid-template-columns: 1fr; gap:14px; /* 1열로 유지 */
     }
-    @media (max-width:700px){ .logo-grid{ grid-template-columns: 1fr } } /* 2열 -> 1열 */
+    @media (max-width:700px){ .logo-grid{ grid-template-columns: 1fr } }
     .logo-slot{
       height:64px; border:1px dashed var(--stroke); border-radius:12px; display:grid; place-items:center; color:var(--muted);
       background: linear-gradient(135deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
       font-size:12px; text-align:center; padding:6px;
     }
     .logo-slot.large{ height:96px; font-weight:700 }
+    /* (추가) 로고 정렬/크기 보조 */
+    .logo-flex{ display:flex; align-items:center; gap:12px; }
+    .logo-img{ height:40px; width:auto; object-fit:contain; }
 
     /* ------------------------------
         푸터
@@ -283,7 +285,7 @@
         <ul>
           <li><a href="#about">소개</a></li>
           <li><a href="#speakers">연사</a></li>
-          <li><a href="#sponsors">주최</a></li> <!-- "주최·후원" -> "주최" -->
+          <li><a href="#sponsors">주최·주관</a></li> <!-- 라벨 업데이트 -->
           <li><a href="#contact">문의</a></li>
         </ul>
       </nav>
@@ -578,17 +580,38 @@
       </ul>
     </section>
 
-    <!-- SPONSORS -------------------------------------------------------- -->
-    <section id="sponsors" aria-label="주최: 부산대학교 데이터사이언스전문대학원" style="margin-top:28px">
-      <!-- .sponsors 래퍼 제거, 패널만 남김 -->
-      <div class="panel">
-        <h3 style="margin:6px 0 12px">주최: 부산대학교 데이터사이언스전문대학원</h3>
+    <!-- SPONSORS / ORGANIZERS ------------------------------------------ -->
+    <section id="sponsors" aria-label="주최·주관: 부산대학교 데이터사이언스전문대학원, Glow-AI BK사업단" style="margin-top:28px">
+      <!-- (주최) -->
+      <div class="panel" aria-labelledby="host-title">
+        <h3 id="host-title" style="margin:6px 0 12px">주최: 부산대학교 데이터사이언스전문대학원</h3>
         <div class="logo-grid">
-
-          <!-- Slot 2: Yoontae Hwang (제거됨) -->
+          <!-- 필요 시 주최 로고 슬롯 추가 가능 -->
         </div>
       </div>
-      <!-- 후원/파트너 패널 제거됨 -->
+
+      <!-- (주관) NEW -->
+      <div class="panel" aria-labelledby="organizers-title" style="margin-top:12px">
+        <h3 id="organizers-title" style="margin:6px 0 12px">주관</h3>
+        <div class="logo-grid">
+          <!-- 부산대학교 데이터사이언스전문대학원 (텍스트 슬롯) -->
+          <div class="logo-slot" aria-label="주관: 부산대학교 데이터사이언스전문대학원">
+            <strong>부산대학교 데이터사이언스전문대학원</strong>
+          </div>
+
+          <!-- Glow-AI BK사업단 (로고 + 이름) -->
+          <div class="logo-slot" aria-label="주관: Glow-AI BK사업단">
+            <div class="logo-flex">
+              <img
+                class="logo-img"
+                loading="lazy"
+                src="./logo/BK.png"
+                alt="Glow-AI BK사업단 로고" />
+              <strong>Glow-AI BK사업단</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT (제거됨) -------------------------------------------------- -->
